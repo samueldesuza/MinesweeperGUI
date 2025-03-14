@@ -20,6 +20,7 @@ public class MinesweeperGUI extends Application {
     public static int height = 9;
     public static int width = 9;
     public static int mineCount = 10;
+    public boolean generatedMines = false;
 
 
     public static void main(String[] args) {
@@ -44,6 +45,25 @@ public class MinesweeperGUI extends Application {
                     @Override
                     public void handle(MouseEvent event) {
                         if (event.getButton() == MouseButton.PRIMARY) {
+                            // On first click generates mines to make sure the tile clicked isnt a mine
+                            if (!generatedMines) {
+                                int counter = 0;
+                                int x;
+                                int y;
+                                Random rand = new Random();
+                                while (counter < mineCount) {
+                                    x = rand.nextInt(width);
+                                    y = rand.nextInt(height);
+                                    // Check to see that the grid dosent already have a mine
+                                    if (!grid.get(y).get(x).getMine() && !(b.getX() == x) && !(b.getY() == y)) {
+                                        grid.get(y).get(x).setMine();
+                                        System.out.printf("%d, %d%n", x, y);
+                                        counter++;
+                                    }
+                                }
+                                generatedMines = true;
+                            }
+
                             if (!b.getFlag())  {
                                 boolean gameOver = clickTile(b.getX(), b.getY(), grid);
                                 if (gameOver) {
@@ -65,23 +85,6 @@ public class MinesweeperGUI extends Application {
                 grid.get(i).add(b);
             }
         }
-
-
-        // Set random amount of mines in the minefield
-        int counter = 0;
-        int x;
-        int y;
-        Random rand = new Random();
-        while (counter < mineCount) {
-            x = rand.nextInt(width);
-            y = rand.nextInt(height);
-            // Check to see that the grid dosent already have a mine
-            if (!grid.get(y).get(x).getMine()) {
-                grid.get(y).get(x).setMine();
-                counter++;
-            }
-        }
-
 
         // Creates the scene for Minesweeper
         GridPane root = new GridPane();
