@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -42,10 +43,23 @@ public class MinesweeperGUI extends Application {
                 b.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        boolean gameOver = clickTile(b.getX(), b.getY(), grid);
-                        if (gameOver) {
-                            primaryStage.close();
+                        if (event.getButton() == MouseButton.PRIMARY) {
+                            if (!b.getFlag())  {
+                                boolean gameOver = clickTile(b.getX(), b.getY(), grid);
+                                if (gameOver) {
+                                    primaryStage.close();
+                                }
+                            }
+                        } if (event.getButton() == MouseButton.SECONDARY && b.getValue() == -1) {
+                            if (b.getFlag()) {
+                                b.setText("■");
+                                b.setFlag(false);
+                            } else {
+                                b.setText("⚑");
+                                b.setFlag(true);
+                            }
                         }
+
                     }
                 });
                 grid.get(i).add(b);

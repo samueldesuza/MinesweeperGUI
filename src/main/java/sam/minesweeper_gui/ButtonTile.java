@@ -7,6 +7,7 @@ public class ButtonTile extends Button {
     int y;
     boolean _hasMine = false;
     int _minesAdjacent = -1;
+    boolean _hasFlag = false;
 
 
     public ButtonTile(int x, int y) {
@@ -35,5 +36,11 @@ public class ButtonTile extends Button {
     }
     public int getY() {
         return y;
+    }
+    public boolean getFlag() {
+        return _hasFlag;
+    }
+    public void setFlag(boolean flag) {
+        _hasFlag = flag;
     }
 }
