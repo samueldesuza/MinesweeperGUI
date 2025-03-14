@@ -54,10 +54,9 @@ public class MinesweeperGUI extends Application {
                                 while (counter < mineCount) {
                                     x = rand.nextInt(width);
                                     y = rand.nextInt(height);
-                                    // Check to see that the grid dosent already have a mine
+                                    // Check to see that the grid doesn't already have a mine
                                     if (!grid.get(y).get(x).getMine() && !(b.getX() == x) && !(b.getY() == y)) {
                                         grid.get(y).get(x).setMine();
-                                        System.out.printf("%d, %d%n", x, y);
                                         counter++;
                                     }
                                 }
