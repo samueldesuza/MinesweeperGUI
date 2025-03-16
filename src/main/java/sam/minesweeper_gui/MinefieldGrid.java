@@ -1,5 +1,6 @@
 package sam.minesweeper_gui;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -91,7 +92,7 @@ public class MinefieldGrid {
     private void clickTile(ButtonTile tile) {
         if (tile.getMine()) {
             // When a click is called on a tile with a Mine end the game.
-            System.out.println("LOSS MESSAGE");
+            Platform.exit();
         } else {
             // Checks if the mine has been discovered
             if (tile.getValue() == -1) {
