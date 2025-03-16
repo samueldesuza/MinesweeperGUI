@@ -9,10 +9,10 @@ public class ButtonTile extends Button {
     int _minesAdjacent = -1;
     boolean _hasFlag = false;
 
-
     public ButtonTile(int x, int y) {
         this.x = x;
         this.y = y;
+        this.setText("■");
     }
 
     public void setMine() {
@@ -40,7 +40,13 @@ public class ButtonTile extends Button {
     public boolean getFlag() {
         return _hasFlag;
     }
-    public void setFlag(boolean flag) {
-        _hasFlag = flag;
+    public void addFlag() {
+        _hasFlag = true;
+        this.setText("⚑");
+
+    }
+    public void removeFlag() {
+        _hasFlag = false;
+        this.setText("■");
     }
 }
